@@ -1,59 +1,122 @@
-﻿@model IEnumerable<ozo.Models.Najam>
+﻿@model NajmoviViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title += "Oprema";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">Popis opreme</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj Opremu"><span class="glyphicon glyphicon-plus"></span> Dodaj Opremu</a>
+
+
+
+<div page-info="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default"
+     page-class-selected="btn-primary" class="btn-group pull-right">
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Opis)
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b>Kolicina</b>
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DatumOd)
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b> Cijena</b>
+                </a>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b>Opis</b>
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DatumDo)
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Od</b>
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fimra)
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b>  Do</b>
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VrstaNajma)
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Firma</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Oprema</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Najam</b>
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.Najam)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Opis)
+                @item.Kolicina
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DatumOd)
+                @item.Cijena
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DatumDo)
+                @item.Opis
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fimra.Naziv)
+                @item.DatumOd
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VrstaNajma.Naziv)
+                @item.DatumOd
+            </td>
+
+            <td>
+                @item.NazivFirme
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.NajamId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NajamId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NajamId">Delete</a>
+                @item.NazivOpreme
+            </td>
+            <td>
+                @item.VrstaNajma
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NajamId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+            </td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="NajamId" value="@item.NajamId" />
+                    <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                </form>
+
+
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+<div class="col-xs-12" style="margin-top:10px;">
+    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="Report" asp-action="Oprema"><span class="glyphicon glyphicon-file"></span> Ispiši opremu  (PDF)</a>
+</div>
+
+@section scripts{
+    <script src="~/script_mod.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

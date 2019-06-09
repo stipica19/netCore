@@ -11,12 +11,12 @@ using ozo.Models;
 namespace ozo.Controllers.AutoComplete
 {
     [Route("autocomplete/[controller]")]
-    public class ServisController : Controller
+    public class OpremaController : Controller
     {
         private readonly PI01Context ctx;
         private readonly AppSettings appData;
 
-        public ServisController(PI01Context ctx, IOptions<AppSettings> options)
+        public OpremaController(PI01Context ctx, IOptions<AppSettings> options)
         {
             this.ctx = ctx;
             appData = options.Value;
@@ -25,21 +25,21 @@ namespace ozo.Controllers.AutoComplete
         [HttpGet]
         public IEnumerable<IdLabel> Get(string term)
         {
-            var query = ctx.Servis
-                    .Include(b=>b.Oprema)
+            var query = ctx.Oprema
                             .Select(v => new IdLabel
                             {
-                                Id = v.OsobaId,
-                                Label = v.Osoba.Ime
+                                Id = v.LokacijaOpremeId,
+                                Label = v.LokacijaOpreme.NazivLokacije
                             })
                             .Where(l => l.Label.Contains(term));
 
+   
 
             var list = query.OrderBy(l => l.Label)
                             .ThenBy(l => l.Id)
                             .ToList();
-         
-            
+
+
             return list;
         }
     }

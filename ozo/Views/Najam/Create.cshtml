@@ -1,4 +1,4 @@
-﻿@model ozo.Models.Najam
+﻿@model ozo.Models.ViewNajam
 
 @{
     ViewData["Title"] = "Create";
@@ -13,28 +13,66 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Kolicina" class="control-label"></label>
+                <input asp-for="Kolicina" class="form-control" />
+                <span asp-validation-for="Kolicina" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Cijena" class="control-label"></label>
+                <input asp-for="Cijena" class="form-control" />
+                <span asp-validation-for="Cijena" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Opis" class="control-label"></label>
                 <input asp-for="Opis" class="form-control" />
                 <span asp-validation-for="Opis" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="FimraId" class="control-label"></label>
-                <select asp-for="FimraId" class ="form-control" asp-items="ViewBag.FimraId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="VrstaNajmaId" class="control-label"></label>
-                <select asp-for="VrstaNajmaId" class ="form-control" asp-items="ViewBag.VrstaNajmaId"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="DatumOd" class="control-label"></label>
                 <input asp-for="DatumOd" class="form-control" />
                 <span asp-validation-for="DatumOd" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="DatumDo" class="control-label"></label>
                 <input asp-for="DatumDo" class="form-control" />
                 <span asp-validation-for="DatumDo" class="text-danger"></span>
             </div>
+
+
+
+            <div class="form-group">
+
+                <label asp-for="VrstaNajmaId"></label>
+                <div><span asp-validation-for="VrstaNajmaId" class="text-danger" /></div>
+                <select class="form-control" asp-for="VrstaNajmaId" asp-items="ViewBag.NajamList">
+                    <option disabled selected value="">Odaberit najam</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="FimraId"></label><label style="font-size:12px; float:right;">*autocomplete</label>
+                <div><span asp-validation-for="FimraId" class="text-danger"></span></div>
+                <input class="form-control" data-autocomplete="Najam"
+                       data-autocomplete-result="imeopreme"
+                       value="" />
+                <input type="hidden" asp-for="FimraId" data-autocomplete-result="imeopreme" />
+            </div>
+
+
+            <div class="form-group">
+
+                <label asp-for="OpremaId"></label>
+                <div><span asp-validation-for="OpremaId" class="text-danger" /></div>
+                <select class="form-control" asp-for="OpremaId" asp-items="ViewBag.OpremaList">
+                    <option disabled selected value="">Odaberit najam</option>
+                </select>
+
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

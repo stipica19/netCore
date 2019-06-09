@@ -42,6 +42,7 @@ namespace ozo.Models
         public virtual DbSet<ViewUsluga> Vw_Usluga { get; set; }
         public virtual DbSet<ViewOprema> Vw_Oprema { get; set; }
         public virtual DbSet<ViewOsoba> Vw_Osoba { get; set; }
+        public virtual DbSet<ViewNajam> Vw_Najam { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,6 +55,14 @@ namespace ozo.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<ViewNajam>(entity => {
+
+                entity.HasKey(e => e.NajamId);
+
+            });
+
+
 
             modelBuilder.Entity<ViewOprema>(entity => {
 
@@ -181,7 +190,7 @@ namespace ozo.Models
 
                 entity.Property(e => e.VrstaNajmaId).HasColumnName("vrstaNajmaId");
 
-                entity.HasOne(d => d.Fimra)
+                entity.HasOne(d => d.Firma)
                     .WithMany(p => p.NajamFimra)
                     .HasForeignKey(d => d.FimraId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

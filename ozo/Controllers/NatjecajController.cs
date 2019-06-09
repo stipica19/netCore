@@ -148,65 +148,24 @@ namespace ozo.Controllers
 
         }
 
-        // GET: Natjecaj/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var natjecaj = await _context.Natjecaj.FindAsync(id);
+            var natjecaj = _context.Natjecaj.Find(id);
             if (natjecaj == null)
             {
-                return NotFound();
+                logger.LogWarning("Ne postoji natjecaj s oznakom: {0} ", id);
+                return NotFound("Ne postoji natjecaj s oznakom: " + id);
             }
-            ViewData["PobiednikId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.PobiednikId);
-            ViewData["RaspisateljId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.RaspisateljId);
-            ViewData["VrstaNatjecajaId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.VrstaNatjecajaId);
-            return View(natjecaj);
+            else
+            {
+                PrepareDropDownLists();
+                return View(natjecaj);
+            }
         }
-
-        // POST: Natjecaj/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NatjecajId,Naziv,Opis,Vrijednost,VrijemeOd,VrijemeDo,VrstaNatjecajaId,RaspisateljId,PobiednikId")] Natjecaj natjecaj)
-        {
-            if (id != natjecaj.NatjecajId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(natjecaj);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NatjecajExists(natjecaj.NatjecajId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["PobiednikId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.PobiednikId);
-            ViewData["RaspisateljId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.RaspisateljId);
-            ViewData["VrstaNatjecajaId"] = new SelectList(_context.Registar, "RegistarId", "Naziv", natjecaj.VrstaNatjecajaId);
-            return View(natjecaj);
-        }
-
-        // GET: Natjecaj/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> EditPost(int? id)
         {
             if (id == null)
             {
@@ -214,28 +173,69 @@ namespace ozo.Controllers
             }
 
             var natjecaj = await _context.Natjecaj
-                .Include(n => n.Pobiednik)
-                .Include(n => n.Raspisatelj)
-                .Include(n => n.VrstaNatjecaja)
-                .FirstOrDefaultAsync(m => m.NatjecajId == id);
-            if (natjecaj == null)
-            {
-                return NotFound();
-            }
+                .FirstOrDefaultAsync(c => c.NatjecajId == id);
 
+            if (await TryUpdateModelAsync<Natjecaj>(natjecaj,
+                "",
+                
+                c => c.Naziv,
+                c => c.Opis,
+                c => c.Vrijednost,
+                c => c.VrijemeOd,
+                c => c.VrijemeDo,
+                c => c.VrstaNatjecajaId,
+                c => c.RaspisateljId,
+                c => c.PobiednikId
+                ))
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    TempData[Constants.Message] = "Uspjesno azuriranje natjecaj " + natjecaj.Naziv;
+                }
+                catch (DbUpdateException /* ex */)
+                {
+
+                    ModelState.AddModelError("", "Neuspješno ažuriranje! ");
+                }
+                return RedirectToAction(nameof(Index));
+            }
             return View(natjecaj);
         }
 
-        // POST: Natjecaj/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // GET: Oprema/Delete/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult Delete(int NatjecajId)
         {
-            var natjecaj = await _context.Natjecaj.FindAsync(id);
-            _context.Natjecaj.Remove(natjecaj);
-            await _context.SaveChangesAsync();
+            var natjecaj = _context.Natjecaj.Find(NatjecajId);
+            if (natjecaj != null)
+            {
+                try
+                {
+                    int naziv = natjecaj.NatjecajId;
+                    _context.Remove(natjecaj);
+                    _context.SaveChanges();
+                    logger.LogInformation($"Natjecaj {naziv} uspješno obrisan.");
+
+                    TempData[Constants.ErrorOccurred] = false;
+                }
+                catch (Exception exc)
+                {
+                    logger.LogError("Pogreška prilikom brisanja natjecaja: " + exc.CompleteExceptionMessage());
+                    logger.LogError("Pogreška prilikom brisanja natjecaja: " + exc.CompleteExceptionMessage());
+                    TempData[Constants.Message] = "Pogreška prilikom brisanja natjecaja: " + exc.CompleteExceptionMessage();
+                    TempData[Constants.ErrorOccurred] = true;
+                }
+            }
+            else
+            {
+                TempData[Constants.Message] = "Ne postoji natjecaj s oznakom: " + NatjecajId;
+                TempData[Constants.ErrorOccurred] = true;
+            }
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool NatjecajExists(int id)
         {

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ozo.Models
 {
-    public partial class Najam
+    public class ViewNajam
     {
-        public Najam()
-        {
-            OpremaStavka = new HashSet<OpremaStavka>();
-        }
-
         public int NajamId { get; set; }
         public string Opis { get; set; }
         public int FimraId { get; set; }
@@ -17,8 +14,15 @@ namespace ozo.Models
         public DateTime DatumOd { get; set; }
         public DateTime DatumDo { get; set; }
 
-        public Registar Firma { get; set; }
-        public Registar VrstaNajma { get; set; }
-        public ICollection<OpremaStavka> OpremaStavka { get; set; }
+        public string NazivOpreme { get; set; }
+        public string VrstaNajma { get; set; }
+        public int Kolicina { get; set; }
+        public int Cijena { get; set; }
+        public int OpremaId { get; set; }
+        public string NazivFirme { get; set; }
+
+
+
+
     }
 }
