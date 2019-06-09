@@ -1,0 +1,92 @@
+﻿@model OsobeViewModel
+
+@{
+    ViewData["Title"] = "Osobe";
+}
+
+<h2 class="text-center">Popis osoba</h2>
+
+
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj osobu"><span class="glyphicon glyphicon-plus"></span> Dodaj osobu</a>
+
+
+
+<div  page-info="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+      page-class="btn" page-class-normal="btn-default"
+       page-class-selected="btn-primary" class="btn-group pull-right">
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b>Ime</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b> Prezime</b>
+                </a>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Godina Rodjenja</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Certifikat</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b>  Zanimanje</b>
+                </a>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Osoba)
+        {
+            <tr>
+                <td>
+                    @item.Ime
+                </td>
+                <td>
+                    @item.Prezime
+                </td>
+                <td>
+                    @item.God_rodjenja
+                </td>
+                <td>
+                    @item.NazivCertifikata
+                </td>
+                <td>
+                    @item.NazivZanimanja
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OsobaId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="OsobaId" value="@item.OsobaId" />
+                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-xs-12" style="margin-top:10px;">
+    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="Report" asp-action="Osoba"><span class="glyphicon glyphicon-file"></span> Ispiši sve osobe  (PDF)</a>
+</div>
+@section scripts{
+    <script src="~/script_mod.js"></script>
+
+}

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ozo.Models.Najam>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumOd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumDo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fimra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VrstaNajma)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumOd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumDo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fimra.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrstaNajma.Naziv)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NajamId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.NajamId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.NajamId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

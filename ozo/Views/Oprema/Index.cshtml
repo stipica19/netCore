@@ -1,0 +1,103 @@
+﻿@model OpremaModel
+
+@{
+    ViewBag.Title += "Oprema";
+}
+
+<h2 class="text-center">Popis opreme</h2>
+
+
+    <a asp-action="Create"  class="btn btn btn-success colorBtn btn-lg" title="Dodaj Opremu"><span class="glyphicon glyphicon-plus"></span> Dodaj Opremu</a>
+
+
+
+<div page-info="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default"
+     page-class-selected="btn-primary" class="btn-group pull-right">
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b>Inventarni broj</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b> Naziv</b>
+                </a>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Knjigovostvena vrijednost</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Lokacija opreme</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b>  Referentni tip opreme</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b>  Status</b>
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Oprema)
+        {
+            <tr>
+                <td>
+                    @item.InventarniBroj
+                </td>
+                <td>
+                    @item.Naziv
+                </td>
+                <td>
+                    @item.KnjigovostvenaVrijednost
+                </td>
+                <td>
+                    @item.LokacijaOpreme.NazivLokacije
+                </td>
+                <td>
+                    @item.ReferentniTipOpreme.Naziv
+                </td>
+                <td>
+                    @item.Status.Naziv
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OpremaId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="OpremaId" value="@item.OpremaId" />
+                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-xs-12" style="margin-top:10px;">
+    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="Report" asp-action="Oprema"><span class="glyphicon glyphicon-file"></span> Ispiši opremu  (PDF)</a>
+</div>
+
+@section scripts{
+    <script src="~/script_mod.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

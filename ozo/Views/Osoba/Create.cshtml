@@ -1,0 +1,66 @@
+﻿@model ozo.Models.ViewOsoba
+
+
+@{
+    ViewData["Title"] = "Dodavanje nove osobe";
+}
+
+<h2 class="text-center">Dodavanje nove osobe</h2>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Ime" class="control-label"></label>
+                <input asp-for="Ime" class="form-control" />
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Prezime" class="control-label"></label>
+                <input asp-for="Prezime" class="form-control" />
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="CertifikatId"></label>
+                <div><span asp-validation-for="CertifikatId" class="text-danger" /></div>
+                <select class="form-control" asp-for="CertifikatId" asp-items="ViewBag.StatusOpreme">
+                    <option disabled selected value="">Odaberite certifikat za osobu</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+
+                <label asp-for="ZanimanjeId"></label>
+                <div><span asp-validation-for="ZanimanjeId" class="text-danger" /></div>
+                <select class="form-control" asp-for="ZanimanjeId" asp-items="ViewBag.ZanimanjeList">
+                    <option disabled selected value="">Odaberite certifikat za osobu</option>
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="God_rodjenja" class="control-label"></label>
+                <input asp-for="God_rodjenja" class="form-control" />
+                <span asp-validation-for="God_rodjenja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Spremi" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Vrati se nazad</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

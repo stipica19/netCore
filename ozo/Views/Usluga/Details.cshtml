@@ -1,0 +1,36 @@
+﻿@model ozo.Models.Usluga
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Usluga</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KategorijaPosla)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KategorijaPosla.Naziv)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.UslugaId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

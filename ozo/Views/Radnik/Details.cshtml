@@ -1,0 +1,30 @@
+﻿@model ozo.Models.Radnik
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Radnik</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Kategorija.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Osoba)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Osoba.Prezime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RadnikId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,69 @@
+﻿@model ozo.Models.Oprema
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Oprema</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OpremaId" />
+            <div class="form-group">
+                <label asp-for="InventarniBroj" class="control-label"></label>
+                <input asp-for="InventarniBroj" class="form-control" />
+                <span asp-validation-for="InventarniBroj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naziv" class="control-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KnjigovostvenaVrijednost" class="control-label"></label>
+                <input asp-for="KnjigovostvenaVrijednost" class="form-control" />
+                <span asp-validation-for="KnjigovostvenaVrijednost" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReferentniTipOpremeId"></label>
+                <div><span asp-validation-for="ReferentniTipOpremeId" class="text-danger" /></div>
+                <select class="form-control" asp-for="ReferentniTipOpremeId" asp-items="ViewBag.ReferentniTipOpreme">
+                    <option disabled selected value="">Odaberite Referentni Tip Opreme</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LokacijaOpremeId"></label>
+                <div><span asp-validation-for="LokacijaOpremeId" class="text-danger" /></div>
+                <select class="form-control" asp-for="LokacijaOpremeId" asp-items="ViewBag.LokacijaOpreme">
+                    <option disabled selected value="">Odaberite lokaciju opreme</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StatusId"></label>
+                <div><span asp-validation-for="StatusId" class="text-danger" /></div>
+                <select class="form-control" asp-for="StatusId" asp-items="ViewBag.StatusOpreme">
+                    <option disabled selected value="">Odaberite status opreme</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary btn-lg" type="submit"><span class="glyphicon glyphicon-edit"></span> Ažuriraj</button>
+                <a asp-action="" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span> Odustani</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Nazad na listu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,66 @@
+﻿@model ozo.Models.Natjecaj
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Natjecaj</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vrijednost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vrijednost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VrijemeOd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VrijemeOd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VrijemeDo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VrijemeDo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Pobiednik)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Pobiednik.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Raspisatelj)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Raspisatelj.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VrstaNatjecaja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VrstaNatjecaja.Naziv)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.NatjecajId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

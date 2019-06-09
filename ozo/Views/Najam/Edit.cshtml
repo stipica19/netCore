@@ -1,0 +1,51 @@
+﻿@model ozo.Models.Najam
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Najam</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="NajamId" />
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FimraId" class="control-label"></label>
+                <select asp-for="FimraId" class="form-control" asp-items="ViewBag.FimraId"></select>
+                <span asp-validation-for="FimraId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VrstaNajmaId" class="control-label"></label>
+                <select asp-for="VrstaNajmaId" class="form-control" asp-items="ViewBag.VrstaNajmaId"></select>
+                <span asp-validation-for="VrstaNajmaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatumOd" class="control-label"></label>
+                <input asp-for="DatumOd" class="form-control" />
+                <span asp-validation-for="DatumOd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatumDo" class="control-label"></label>
+                <input asp-for="DatumDo" class="form-control" />
+                <span asp-validation-for="DatumDo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

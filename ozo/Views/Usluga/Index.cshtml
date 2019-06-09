@@ -1,0 +1,87 @@
+﻿@model UslugeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj uslugu"><span class="glyphicon glyphicon-plus"></span> Dodaj uslugu</a>
+
+
+
+<div page-info="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default"
+     page-class-selected="btn-primary" class="btn-group pull-right">
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b>Naziv</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b> Opis</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Kategorija usluge</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Oprema</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Zanimanje</b>
+                </a>
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Usluga)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KategorijaPoslaNaziv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivTipaOpreme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivTipaZanimanja)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UslugaId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="UslugaId" value="@item.UslugaId" />
+                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script src="~/script_mod.js"></script>
+
+}

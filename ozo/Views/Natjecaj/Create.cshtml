@@ -1,0 +1,93 @@
+﻿@model ozo.Models.Natjecaj
+
+@{
+    ViewBag.Title += "Create";
+}
+<h2 class="text-center">Dodavanje nove opreme</h2>
+
+<hr />
+
+
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label asp-for="Naziv"></label>
+        <div><span asp-validation-for="Naziv" class="text-danger" /></div>
+        <input asp-for="Naziv" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Opis"></label>
+        <div><span asp-validation-for="Opis" class="text-danger" /></div>
+        <input asp-for="Opis" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Vrijednost"></label>
+        <div><span asp-validation-for="Vrijednost" class="text-danger" /></div>
+        <input asp-for="Vrijednost" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VrijemeOd"></label>
+        <div><span asp-validation-for="VrijemeOd" class="text-danger" /></div>
+        <input asp-for="VrijemeOd" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="VrijemeDo"></label>
+        <div><span asp-validation-for="VrijemeDo" class="text-danger" /></div>
+        <input asp-for="VrijemeDo" class="form-control" />
+    </div>
+
+    <div class="form-group">
+
+        <label asp-for="VrstaNatjecajaId"></label>
+        <div><span asp-validation-for="VrstaNatjecajaId" class="text-danger" /></div>
+        <select class="form-control" asp-for="VrstaNatjecajaId" asp-items="ViewBag.vrsta">
+            <option disabled selected value="">Odaberite vrstu</option>
+        </select>
+
+    </div>
+
+    <div class="form-group">
+
+        <label asp-for="RaspisateljId"></label>
+        <div><span asp-validation-for="RaspisateljId" class="text-danger" /></div>
+        <select class="form-control" asp-for="RaspisateljId" asp-items="ViewBag.Raspisatelj">
+            <option disabled selected value="">Odaberite raspisatelja</option>
+        </select>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+        <label asp-for="PobiednikId"></label>
+        <div><span asp-validation-for="PobiednikId" class="text-danger" /></div>
+        <select class="form-control" asp-for="PobiednikId" asp-items="ViewBag.Raspisatelj">
+            <option disabled selected value="">Odaberite pobjednika</option>
+        </select>
+
+    </div>
+
+
+
+
+    <hr />
+    <div class="text-center">
+        <button class="btn btn-primary btn-lg" type="submit"><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
+        <a asp-action="" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span> Odustani</a>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Nazad na listu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+   }

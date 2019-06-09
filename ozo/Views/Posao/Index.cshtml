@@ -1,0 +1,90 @@
+﻿@model PosaoViewModel
+
+@using ozo
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj Posao"><span class="glyphicon glyphicon-plus"></span> Dodaj Posao</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cijena
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Lokacija
+            </th>
+            <th>
+                Natjecaj
+            </th>
+            <th>
+                Usluga
+            </th>
+            <th>
+                OD
+            </th>
+            <th>
+                DO
+            </th>
+            <th>
+
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Poslovi)
+        {
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cijena) KM
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivLokacije)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivNatjecaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NazivUsluge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VrijemeOd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VrijemeDo)
+                </td>
+
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PosaoId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="PosaoId" value="@item.PosaoId" />
+                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-xs-12" style="margin-top:10px;">
+    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="report" asp-action="Osoba"><span class="glyphicon glyphicon-file"></span> Ispiši sve poslove  (PDF)</a>
+</div>

@@ -1,0 +1,62 @@
+﻿@model ozo.Models.OsobaCertifikat
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2 class="text-center">Dodavanje nove opreme</h2>
+
+<hr />
+
+
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    @*<div class="form-group">
+            <label asp-for="OpremaId"></label>
+            <div><span asp-validation-for="OpremaId" class="text-danger" /></div>
+            <input asp-for="OpremaId" class="form-control" />
+        </div>*@
+
+    <div class="form-group">
+        <label asp-for="OsobaCertifikatId"></label>
+        <div><span asp-validation-for="OsobaCertifikatId" class="text-danger" /></div>
+        <input asp-for="OsobaCertifikatId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OsobaId"></label>
+        <div><span asp-validation-for="OsobaId" class="text-danger" /></div>
+        <input asp-for="OsobaId" class="form-control" />
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+
+        <label asp-for="CertifikatId"></label>
+        <div><span asp-validation-for="CertifikatId" class="text-danger" /></div>
+        <select class="form-control" asp-for="CertifikatId" asp-items="ViewBag.StatusOpreme">
+            <option disabled selected value="">Odaberite status opreme</option>
+        </select>
+
+    </div>
+
+    <hr />
+    <div class="text-center">
+        <button class="btn btn-primary btn-lg" type="submit"><span class="glyphicon glyphicon-plus"></span> Dodaj</button>
+        <a asp-action="" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span> Odustani</a>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Nazad na listu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

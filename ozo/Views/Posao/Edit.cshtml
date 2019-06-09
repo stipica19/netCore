@@ -1,0 +1,69 @@
+﻿@model ozo.Models.Posao
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Posao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PosaoId" />
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cijena" class="control-label"></label>
+                <input asp-for="Cijena" class="form-control" />
+                <span asp-validation-for="Cijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DodatniTrosak" class="control-label"></label>
+                <input asp-for="DodatniTrosak" class="form-control" />
+                <span asp-validation-for="DodatniTrosak" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VrijemeOd" class="control-label"></label>
+                <input asp-for="VrijemeOd" class="form-control" />
+                <span asp-validation-for="VrijemeOd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VrijemeDo" class="control-label"></label>
+                <input asp-for="VrijemeDo" class="form-control" />
+                <span asp-validation-for="VrijemeDo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UslugaId" class="control-label"></label>
+                <select asp-for="UslugaId" class="form-control" asp-items="ViewBag.UslugaId"></select>
+                <span asp-validation-for="UslugaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LokacijaPoslaId" class="control-label"></label>
+                <select asp-for="LokacijaPoslaId" class="form-control" asp-items="ViewBag.LokacijaPoslaId"></select>
+                <span asp-validation-for="LokacijaPoslaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NatjecajId" class="control-label"></label>
+                <select asp-for="NatjecajId" class="form-control" asp-items="ViewBag.NatjecajId"></select>
+                <span asp-validation-for="NatjecajId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

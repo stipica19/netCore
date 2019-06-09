@@ -1,0 +1,54 @@
+﻿@model ozo.Models.Oprema
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Oprema</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InventarniBroj)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InventarniBroj)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KnjigovostvenaVrijednost)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KnjigovostvenaVrijednost)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LokacijaOpreme)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LokacijaOpreme.LokacijaOpremeId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ReferentniTipOpreme)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ReferentniTipOpreme.Naziv)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status.Naziv)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.OpremaId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+    <a asp-action="Index" class="btn-default">Nazad na Opremu</a>
+</div>
