@@ -84,3 +84,14 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
+    <script src="~/js/autocomplete.js"></script>
+
+}
+@section styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
+}
+

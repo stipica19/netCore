@@ -227,11 +227,11 @@ namespace ozo.Controllers
                     _context.SaveChanges();
                     logger.LogInformation($"oprema {naziv} uspješno obrisan.");
 
-                    //TempData[Constants.ErrorOccurred] = false;
+                    TempData[Constants.ErrorOccurred] = false;
                 }
                 catch (Exception exc)
                 {
-                    // logger.LogError("Pogreška prilikom brisanja opreme: " + exc.CompleteExceptionMessage());
+                     logger.LogError("Pogreška prilikom brisanja opreme: " + exc.CompleteExceptionMessage());
                     logger.LogError("Pogreška prilikom brisanja opreme: " + exc.CompleteExceptionMessage());
                     TempData[Constants.Message] = "Pogreška prilikom brisanja opreme: " + exc.CompleteExceptionMessage();
                     TempData[Constants.ErrorOccurred] = true;

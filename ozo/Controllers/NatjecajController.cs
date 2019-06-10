@@ -61,9 +61,26 @@ namespace ozo.Controllers
             switch (sort)
             {
                 case 1:
-                    orderSelector = d => d.NatjecajId;
+                    orderSelector = d => d.Naziv;
                     break;
-               
+                case 2:
+                    orderSelector = d => d.Opis;
+                    break;
+                case 3:
+                    orderSelector = d => d.Vrijednost;
+                    break;
+                case 4:
+                    orderSelector = d => d.Pobiednik;
+                    break;
+
+                case 5:
+                    orderSelector = d => d.VrstaNatjecaja;
+                    break;
+                case 6:
+                    orderSelector = d => d.Raspisatelj;
+                    break;
+                
+
 
             }
             if (orderSelector != null)

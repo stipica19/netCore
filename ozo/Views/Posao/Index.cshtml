@@ -1,75 +1,71 @@
-﻿@model PosaoViewModel
-
-@using ozo
+﻿@model PosloviViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj posao"><span class="glyphicon glyphicon-plus"></span> Dodaj posao</a>
 
-<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj Posao"><span class="glyphicon glyphicon-plus"></span> Dodaj Posao</a>
 
+
+<div page-info="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default"
+     page-class-selected="btn-primary" class="btn-group pull-right">
+</div>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Cijena
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b>Naziv</b>
+                </a>
             </th>
             <th>
-                Opis
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
+                    <b> Opis</b>
+                </a>
             </th>
             <th>
-                Lokacija
-            </th>
-            <th>
-                Natjecaj
-            </th>
-            <th>
-                Usluga
-            </th>
-            <th>
-                OD
-            </th>
-            <th>
-                DO
-            </th>
-            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
 
+                    <b> Kategorija usluge</b>
+                </a>
             </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Oprema</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Zanimanje</b>
+                </a>
+            </th>
+
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Poslovi)
+        @foreach (var item in Model.Posao)
         {
             <tr>
-
-
                 <td>
-                    @Html.DisplayFor(modelItem => item.Cijena) KM
+                    @Html.DisplayFor(modelItem => item.Cijena)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Opis)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NazivLokacije)
+                    @Html.DisplayFor(modelItem => item.NazivOpreme)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NazivNatjecaja)
+                    @Html.DisplayFor(modelItem => item.NazivZanimanja)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NazivUsluge)
+                    @Html.DisplayFor(modelItem => item.DodatniTrosak)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VrijemeOd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VrijemeDo)
-                </td>
-
-
-
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.PosaoId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
                 </td>
@@ -85,6 +81,7 @@
         }
     </tbody>
 </table>
-<div class="col-xs-12" style="margin-top:10px;">
-    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="report" asp-action="Osoba"><span class="glyphicon glyphicon-file"></span> Ispiši sve poslove  (PDF)</a>
-</div>
+@section scripts{
+    <script src="~/script_mod.js"></script>
+
+}

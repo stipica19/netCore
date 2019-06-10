@@ -28,8 +28,8 @@ namespace ozo.Controllers.AutoComplete
             var query = ctx.Oprema
                             .Select(v => new IdLabel
                             {
-                                Id = v.LokacijaOpremeId,
-                                Label = v.LokacijaOpreme.NazivLokacije
+                                Id = v.ReferentniTipOpremeId,
+                                Label = v.ReferentniTipOpreme.Naziv
                             })
                             .Where(l => l.Label.Contains(term));
 

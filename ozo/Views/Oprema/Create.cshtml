@@ -13,7 +13,7 @@
 
 <form asp-action="Create" method="post">
     <div asp-validation-summary="All"></div>
-   
+
 
     <div class="form-group">
         <label asp-for="InventarniBroj"></label>
@@ -40,11 +40,12 @@
 
 
     <div class="form-group">
-        <label asp-for="ReferentniTipOpremeId"></label>
-        <div><span asp-validation-for="ReferentniTipOpremeId" class="text-danger" /></div>
-        <select class="form-control" asp-for="ReferentniTipOpremeId" asp-items="ViewBag.ReferentniTipOpreme">
-            <option disabled selected value="">Odaberite Referentni Tip Opreme</option>
-        </select>
+        <label asp-for="ReferentniTipOpremeId"></label><label style="font-size:12px; float:right;">*autocomplete</label>
+        <div><span asp-validation-for="ReferentniTipOpremeId" class="text-danger"></span></div>
+        <input class="form-control" data-autocomplete="Oprema"
+               data-autocomplete-result="imevrste"
+               value="" />
+        <input type="hidden" asp-for="ReferentniTipOpremeId" data-autocomplete-result="imevrste" />
     </div>
 
     <div class="form-group">
@@ -78,4 +79,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
+    <script src="~/js/autocomplete.js"></script>
+
 }
+@section styles{
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
+}
+
+

@@ -4,10 +4,10 @@
     ViewBag.Title += "Oprema";
 }
 
-<h2 class="text-center">Popis opreme</h2>
+<h2 class="text-center">Popis najmova</h2>
 
 
-<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj Opremu"><span class="glyphicon glyphicon-plus"></span> Dodaj Opremu</a>
+<a asp-action="Create" class="btn btn btn-success colorBtn btn-lg" title="Dodaj Opremu"><span class="glyphicon glyphicon-plus"></span> Dodaj Najam</a>
 
 
 
@@ -54,13 +54,13 @@
                 </a>
             </th>
             <th>
-                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+                <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? Model.PagingInfo.Ascending? false : true : true)">
 
                     <b> Oprema</b>
                 </a>
             </th>
             <th>
-                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+                <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? Model.PagingInfo.Ascending? false : true : true)">
 
                     <b> Najam</b>
                 </a>
@@ -113,7 +113,7 @@
     </tbody>
 </table>
 <div class="col-xs-12" style="margin-top:10px;">
-    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="Report" asp-action="Oprema"><span class="glyphicon glyphicon-file"></span> Ispiši opremu  (PDF)</a>
+    <a target="_blank" class="btn btn-block btn-danger btn-lg" asp-controller="Report" asp-action="Najam"><span class="glyphicon glyphicon-file"></span> Ispiši najmove  (PDF)</a>
 </div>
 
 @section scripts{

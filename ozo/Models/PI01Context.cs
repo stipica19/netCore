@@ -43,6 +43,7 @@ namespace ozo.Models
         public virtual DbSet<ViewOprema> Vw_Oprema { get; set; }
         public virtual DbSet<ViewOsoba> Vw_Osoba { get; set; }
         public virtual DbSet<ViewNajam> Vw_Najam { get; set; }
+        public virtual DbSet<ViewPosao> Vw_Posao { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,7 +63,11 @@ namespace ozo.Models
 
             });
 
+            modelBuilder.Entity<ViewPosao>(entity => {
 
+                entity.HasKey(e => e.PosaoId);
+
+            });
 
             modelBuilder.Entity<ViewOprema>(entity => {
 
@@ -397,9 +402,7 @@ namespace ozo.Models
 
             modelBuilder.Entity<PosaoOprema>(entity =>
             {
-                entity.Property(e => e.PosaoOpremaId)
-                    .HasColumnName("posaoOpremaId")
-                    .ValueGeneratedNever();
+                
 
                 entity.Property(e => e.OpremaId).HasColumnName("opremaId");
 
@@ -422,9 +425,7 @@ namespace ozo.Models
             {
                 entity.HasKey(e => e.RadnikPosaoId);
 
-                entity.Property(e => e.RadnikPosaoId)
-                    .HasColumnName("radnikPosaoId")
-                    .ValueGeneratedNever();
+                
 
                 entity.Property(e => e.PosaoId).HasColumnName("posaoId");
 

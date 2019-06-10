@@ -24,8 +24,8 @@ namespace ozo.Controllers.AutoComplete
             var query = ctx.Vw_Najam
                             .Select(v => new IdLabel
                             {
-                                Id = v.OpremaId,
-                                Label = v.NazivOpreme
+                                Id = v.FimraId,
+                                Label = v.NazivFirme
                             })
                             .Where(l => l.Label.Contains(term));
 

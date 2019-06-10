@@ -1,9 +1,9 @@
 ﻿@model ozo.Models.Servis
 
 @{
-    ViewBag.Title += "Create";
+    ViewData["Title"] = "Create";
 }
-<h2 class="text-center">Dodavanje nove opreme</h2>
+<h2 class="text-center">Dodavanje servisa</h2>
 
 <hr />
 
@@ -21,12 +21,13 @@
 
     </div>
     <div class="form-group">
-        <label asp-for="OpremaId"></label><label style="font-size:12px; float:right;">*autocomplete</label>
-        <div><span asp-validation-for="OpremaId" class="text-danger"></span></div>
-        <input class="form-control" data-autocomplete="Servis"
-               data-autocomplete-result="imeopreme"
-               value="" />
-        <input type="hidden" asp-for="OpremaId" data-autocomplete-result="imeopreme" />
+
+        <label asp-for="OpremaId"></label>
+        <div><span asp-validation-for="OpremaId" class="text-danger" /></div>
+        <select class="form-control" asp-for="OpremaId" asp-items="ViewBag.OpremaList">
+            <option disabled selected value="">Odaberite osobu</option>
+        </select>
+
     </div>
 
     <div class="form-group">
@@ -66,10 +67,11 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
     <script src="~/js/autocomplete.js"></script>
+
 }
 @section styles{
     <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />

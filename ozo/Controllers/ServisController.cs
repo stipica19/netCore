@@ -137,7 +137,7 @@ namespace ozo.Controllers
                     _context.SaveChanges();
                     //return RedirectToAction("Index", "Usluga");
                    logger.LogInformation($"Servis {servis.ServisId} dodan.");
-                    TempData[Constants.Message] = $"Oprema {servis.ServisId} dodan.";
+                    TempData[Constants.Message] = $"Servis {servis.ServisId} dodan.";
                     TempData[Constants.ErrorOccurred] = false;
                     return RedirectToAction(nameof(Index));
 

@@ -1,10 +1,6 @@
 ﻿@model ViewNatjecajModel
 
-@using ozo
-@using ozo.Models
-@using ozo.ViewModels
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper ozo.TagHelpers.*, ozo
+
 
 @{
     ViewBag.Title += "natjecaj";
@@ -38,18 +34,23 @@
             </th>
             <th>
                 <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
-
-                    <b> Pobjednik</b>
+                    <b> Vrijednost</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
 
-                    <b> Vrijednost</b>
+                    <b> Pobjednik</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Vrsta</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
 
                     <b>  Raspisatelj</b>
                 </a>
@@ -61,35 +62,38 @@
     <tbody>
         @foreach (var item in Model.Natjecaj)
         {
-            <tr>
-                <td>
-                    @item.Naziv
-                </td>
-                <td>
-                    @item.Opis
-                </td>
-                <td>
-                    @item.Pobiednik.Naziv
-                </td>
-                <td>
-                    @item.Vrijednost
-                </td>
-                <td>
-                    @item.Raspisatelj.Naziv
-                </td>
+        <tr>
+            <td>
+                @item.Naziv
+            </td>
+            <td>
+                @item.Opis
+            </td>
+            <td>
+                @item.Vrijednost
+            </td>
+            <td>
+                @item.Pobiednik.Naziv
+            </td>
+            <td>
+                @item.VrstaNatjecaja.Naziv
+            </td>
+            <td>
+                @item.Raspisatelj.Naziv
+            </td>
 
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.NatjecajId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
-                </td>
-                <td>
-                    <form asp-action="Delete" method="post">
-                        <input type="hidden" name="NatjecajId" value="@item.NatjecajId" />
-                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
-                    </form>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NatjecajId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+            </td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="NatjecajId" value="@item.NatjecajId" />
+                    <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                </form>
 
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
