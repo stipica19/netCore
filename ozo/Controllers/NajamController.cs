@@ -124,7 +124,7 @@ namespace ozo.Controllers
                     najam.VrstaNajmaId = viewNajam.VrstaNajmaId;
                     najam.Opis = viewNajam.Opis;
 
-
+                    Console.WriteLine("idees" + viewNajam.NajamId);
 
                     _context.Najam.Add(najam);
 

@@ -16,30 +16,54 @@
         <tr>
             <th>
                 <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? Model.PagingInfo.Ascending? false : true : true)">
-                    <b>Naziv</b>
+                    <b>Opis</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? Model.PagingInfo.Ascending? false : true : true)">
-                    <b> Opis</b>
+                    <b>Usluga</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? Model.PagingInfo.Ascending? false : true : true)">
 
-                    <b> Kategorija usluge</b>
+                    <b>Oprema</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? Model.PagingInfo.Ascending? false : true : true)">
 
-                    <b> Oprema</b>
+                    <b>Radnik</b>
                 </a>
             </th>
             <th>
                 <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? Model.PagingInfo.Ascending? false : true : true)">
 
-                    <b> Zanimanje</b>
+                    <b> Lokacija</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Cijena</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Dodatni trošak</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Vrijeme od</b>
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="9" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 9 ? Model.PagingInfo.Ascending? false : true : true)">
+
+                    <b> Vrijeme do</b>
                 </a>
             </th>
 
@@ -50,34 +74,46 @@
     <tbody>
         @foreach (var item in Model.Posao)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cijena)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Opis)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NazivOpreme)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NazivZanimanja)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DodatniTrosak)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PosaoId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
-                </td>
-                <td>
-                    <form asp-action="Delete" method="post">
-                        <input type="hidden" name="PosaoId" value="@item.PosaoId" />
-                        <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
-                    </form>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivUsluge)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivOpreme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivZanimanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NazivLokacije)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cijena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DodatniTrosak)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrijemeOd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VrijemeDo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PosaoId" class="btn colorBtn" title="Ažuriraj"><span class="glyphicon glyphicon-edit"></span> Uredi</a>
+            </td>
+            <td>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" name="PosaoId" value="@item.PosaoId" />
+                    <button type="submit" class="btn btn-danger delete" title="Obriši"><span class="glyphicon glyphicon-remove"></span> Obriši</button>
+                </form>
 
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

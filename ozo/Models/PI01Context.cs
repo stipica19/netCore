@@ -20,7 +20,7 @@ namespace ozo.Models
         public virtual DbSet<LokacijaPosla> LokacijaPosla { get; set; }
         public virtual DbSet<Najam> Najam { get; set; }
         public virtual DbSet<Natjecaj> Natjecaj { get; set; }
-       // public virtual DbSet<NatjecajFirma> NatjecajFirma { get; set; }
+      
         public virtual DbSet<Oprema> Oprema { get; set; }
         public virtual DbSet<OpremaStavka> OpremaStavka { get; set; }
         public virtual DbSet<Osoba> Osoba { get; set; }
@@ -38,7 +38,7 @@ namespace ozo.Models
         public virtual DbSet<UslugaLjudi> UslugaLjudi { get; set; }
         public virtual DbSet<UslugaOprema> UslugaOprema { get; set; }
         public virtual DbSet<Zanimanje> Zanimanje { get; set; }
-        //public virtual DbSet<ViewPosao> Vw_PO { get; set; }
+        
         public virtual DbSet<ViewUsluga> Vw_Usluga { get; set; }
         public virtual DbSet<ViewOprema> Vw_Oprema { get; set; }
         public virtual DbSet<ViewOsoba> Vw_Osoba { get; set; }
@@ -82,11 +82,7 @@ namespace ozo.Models
 
             });
 
-            //modelBuilder.Entity<ViewPosao>(entity => {
 
-            //    entity.HasKey(e => e.PosaoId);
-
-            //});
 
             modelBuilder.Entity<ViewUsluga>(entity => {
 
@@ -357,8 +353,6 @@ namespace ozo.Models
             {
                 
 
-                
-
                 entity.Property(e => e.Cijena).HasColumnName("cijena");
 
                 entity.Property(e => e.DodatniTrosak).HasColumnName("dodatniTrosak");
@@ -402,8 +396,8 @@ namespace ozo.Models
 
             modelBuilder.Entity<PosaoOprema>(entity =>
             {
-                
 
+                entity.HasKey(e => e.PosaoOpremaId);
                 entity.Property(e => e.OpremaId).HasColumnName("opremaId");
 
                 entity.Property(e => e.PosaoId).HasColumnName("posaoId");

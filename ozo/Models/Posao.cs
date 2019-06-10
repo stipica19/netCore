@@ -18,7 +18,7 @@ namespace ozo.Models
         public int? DodatniTrosak { get; set; }
         public DateTime VrijemeOd { get; set; }
         public DateTime VrijemeDo { get; set; }
-        public int? UslugaId { get; set; }
+        public int UslugaId { get; set; }
       
       
 

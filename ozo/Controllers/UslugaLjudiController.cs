@@ -60,7 +60,9 @@ namespace ozo.Controllers
 
                     
                     _context.UslugaLjudi.Add(uslugaLjudi);
+                   
                     _context.SaveChanges();
+                    
                     //logger.LogInformation($"Osoba {osoba.Ime} dodana.");
                     // TempData[Constants.Message] = $"Osoba {} dodana.";
                     //  TempData[Constants.ErrorOccurred] = false;

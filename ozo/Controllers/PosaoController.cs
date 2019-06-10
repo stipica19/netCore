@@ -26,7 +26,7 @@ namespace ozo.Controllers
             appData = options.Value;
         }
 
-        // GET: Usluga
+        // GET: Posoa
         public IActionResult Index(int page = 1, int sort = 1, bool ascending = true)
         {
 
@@ -65,9 +65,6 @@ namespace ozo.Controllers
                     orderSelector = d => d.PosaoId;
                     break;
                
-
-
-
             }
             if (orderSelector != null)
             {
@@ -123,36 +120,35 @@ namespace ozo.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 try
                 {
 
-
+                   // return RedirectToAction("Index", "Usluga");
                     Posao posao = new Posao();
 
-                    posao.Opis = posaoView.Opis;
-                    posao.Cijena = posaoView.Cijena;
-                    posao.DodatniTrosak = posaoView.DodatniTrosak;
-                    posao.VrijemeOd = posaoView.VrijemeOd;
-                    posao.VrijemeDo = posaoView.VrijemeDo;
-                    posao.UslugaId = posaoView.UslugaId;
-                    //posao.NatjecajId = posaoView.NatjecajId;
-                   posao.LokacijaPoslaId = posaoView.LokacijaPoslaId;
+                    posao.Opis =             posaoView.Opis;
+                    posao.Cijena =           posaoView.Cijena;
+                    posao.DodatniTrosak =    posaoView.DodatniTrosak;
+                    posao.VrijemeOd =        posaoView.VrijemeOd;
+                    posao.VrijemeDo =        posaoView.VrijemeDo;
+                    posao.UslugaId =         posaoView.UslugaId;
+                    posao.LokacijaPoslaId =  posaoView.LokacijaPoslaId;
 
-                    Console.WriteLine("idee" + posaoView.PosaoId);
+                   
 
                     _context.Add(posao);
 
-                    PosaoRadnik pr = new PosaoRadnik();
-                    pr.PosaoId = posao.PosaoId;
-                    pr.RadnikId = posaoView.RadnikId;
+                  //  PosaoRadnik pr = new PosaoRadnik();
+                   // pr.PosaoId = posaoView.PosaoId;
+                  //  pr.RadnikId = posaoView.RadnikId;
 
-                    _context.PosaoRadnik.Add(pr);
+                  //  PosaoOprema po = new PosaoOprema();
+//po.PosaoId = posaoView.PosaoId;
+                  //  po.OpremaId = posaoView.OpremaId;
 
-
-                    PosaoOprema po = new PosaoOprema();
-                    po.PosaoId = posao.PosaoId;
-                    po.OpremaId = posaoView.OpremaId;
-                    _context.PosaoOprema.Add(po);
+                   // _context.PosaoRadnik.Add(pr);
+                   // _context.PosaoOprema.Add(po);
 
                     
 
@@ -162,26 +158,29 @@ namespace ozo.Controllers
                     logger.LogInformation($"Posao {posao.PosaoId} dodan.");
                     TempData[Constants.Message] = $"Posao {posao.PosaoId}dodan.";
                     TempData[Constants.ErrorOccurred] = false;
-                    return RedirectToAction(nameof(Index));
+
+                   
+
+                    return RedirectToAction("Create", "PosaoRadniks", new { posao.PosaoId, posaoView.KategorijaId, posaoView.OpremaId });
 
                 }
                 catch (Exception exc)
                 {
                     logger.LogError("Pogreška prilikom dodavanje nove usluge: {0}", exc.CompleteExceptionMessage());
                     ModelState.AddModelError(string.Empty, exc.CompleteExceptionMessage());
-                    return View();
+                    return View(posaoView);
                 }
             }
             else
             {
                 PrepareDropDownLists();
-                return View();
+                return View(posaoView);
             }
 
         }
 
 
-        // GET: Posao/Edit/5
+        // GET: Usluga/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -189,53 +188,48 @@ namespace ozo.Controllers
                 return NotFound();
             }
 
-            var posao = await _context.Posao.FindAsync(id);
-            if (posao == null)
+            var course = await _context.Vw_Posao
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.PosaoId == id);
+            if (course == null)
             {
                 return NotFound();
             }
-            ViewData["LokacijaPoslaId"] = new SelectList(_context.LokacijaPosla, "LokacijaPoslaId", "NazivLokacije", posao.LokacijaPoslaId);
-            ViewData["NatjecajId"] = new SelectList(_context.Natjecaj, "NatjecajId", "Naziv", posao.NatjecajId);
-            ViewData["UslugaId"] = new SelectList(_context.Usluga, "UslugaId", "Naziv", posao.UslugaId);
-            return View(posao);
+            PrepareDropDownLists();
+            return View(course);
         }
-
-        // POST: Posao/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PosaoId,Opis,Cijena,DodatniTrosak,VrijemeOd,VrijemeDo,UslugaId,LokacijaPoslaId,NatjecajId")] Posao posao)
+        public async Task<IActionResult> EditPost(ViewPosao posaoView)
         {
-            if (id != posao.PosaoId)
-            {
-                return NotFound();
-            }
+            
+            var courseToUpdate = await _context.Posao
+                                .FirstOrDefaultAsync(c => c.PosaoId == posaoView.PosaoId);
 
-            if (ModelState.IsValid)
+            courseToUpdate.Cijena = posaoView.Cijena;
+            courseToUpdate.Opis = posaoView.Opis;
+            courseToUpdate.VrijemeOd = posaoView.VrijemeOd;
+            courseToUpdate.VrijemeDo = posaoView.VrijemeDo;
+            courseToUpdate.UslugaId = posaoView.UslugaId;
+            _context.SaveChanges();
+            try
             {
-                try
-                {
-                    _context.Update(posao);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PosaoExists(posao.PosaoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                PosaoRadnik pr = new PosaoRadnik();
+                pr.RadnikId = posaoView.RadnikId;
+                pr.PosaoId = posaoView.PosaoId;
+
+
+                PosaoOprema po = new PosaoOprema();
+                po.OpremaId = posaoView.OpremaId;
+                pr.PosaoId = posaoView.PosaoId;
+                _context.SaveChanges();
             }
-            ViewData["LokacijaPoslaId"] = new SelectList(_context.LokacijaPosla, "LokacijaPoslaId", "NazivLokacije", posao.LokacijaPoslaId);
-            ViewData["NatjecajId"] = new SelectList(_context.Natjecaj, "NatjecajId", "Naziv", posao.NatjecajId);
-            ViewData["UslugaId"] = new SelectList(_context.Usluga, "UslugaId", "Naziv", posao.UslugaId);
-            return View(posao);
+            catch (DbUpdateException /* ex */)
+            {
+                ModelState.AddModelError("", "Neuspješno ažuriranje! ");
+            }
+            return RedirectToAction("Index", "Posao");
+
         }
 
         // GET: Posao/Delete/5
